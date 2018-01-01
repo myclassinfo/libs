@@ -1,0 +1,93 @@
+.margin-left-shift{
+	margin-left: 5vh;
+	padding: 0;
+}
+.nav-title{
+	padding: 10px 0 !important;
+}
+
+.tonedown{
+	filter: brightness(30%);
+    -webkit-filter:brightness(30%);
+}
+.newBookTitle{
+	color: #fff;
+}
+.login-cover{
+	background: #2196f3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 800;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.removeScrollBar{
+	overflow:hidden;
+}
+#pageloader{
+	background: #2196f3;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 800;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#search_area{
+	background: #fff;
+	position: fixed;
+	top: 55px;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 800;
+	/*display: flex;*/
+	/*align-items: center;*/
+	justify-content: center;
+}
+.search_item{
+	width: 500px;
+}
+@media only screen and (max-width: 992px){
+	.modal{
+		width: 98%;
+	}
+	.search_item{
+		width: 320px;
+	}
+}
+
+#results{
+	background: #fff;
+	position: fixed;
+	top: 55px;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 800;
+	display: flex;
+	/*align-items: center;*/
+	justify-content: center;
+}
+#bookModal .modal-content{
+	padding: 0px;
+}
+#bookModal .card{
+	margin: 0px;
+}
+.modal.bottom-sheet{
+	max-height: 90%;
+}
+#bkTbl{
+	max-width: 900px;
+}
+.trnc8{
+	overflow: hidden; text-overflow: ellipsis; max-width: 100px;
+}

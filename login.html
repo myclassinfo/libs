@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <!--Import Google Icon Font-->
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <!--Import materialize.css-->
+  	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  	  <link rel="stylesheet" href="assets/css/page.css">
+  	  <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+  	  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+	  <script>
+					      // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyAxhKZzxVp8SfaMb7IAWW-mhmu7GieuDRc",
+		    authDomain: "myclass-2017.firebaseapp.com",
+		    databaseURL: "https://myclass-2017.firebaseio.com",
+		    projectId: "myclass-2017",
+		    storageBucket: "myclass-2017.appspot.com",
+		    messagingSenderId: "994967988683"
+		  };
+		  firebase.initializeApp(config);
+	  </script>
+		<title>My Class | Library</title>
+	  <!--Let browser know website is optimized for mobile-->
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	</head>
+	<body>
+		
+		<div id="pageloader">
+			<div class="preloader-wrapper big active">
+		      <div class="spinner-layer spinner-blue">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-red">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-yellow">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-green">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+		
+		<!-- Login Cover -->
+		<div class="login-cover">
+
+			<div class="row">
+				<div class="col m1 l2"></div>
+		        <div class="col s12 m10 l8">
+		          <div class="card">
+		            <div class="card-content">
+		            	<div class="col s12 center-align">
+		            		
+		            	<img src="assets/img/logo2.png" class="responsive-img">
+		            	</div>
+		              <span class="card-title">Sign in with your Email</span>
+		              <div class="row">
+		              	<form class="col s12" id="loginForm">
+					      <div class="row">
+					        <div class="input-field col s12">
+					          <input id="loginEmail" type="email" class="validate" required="">
+					          <label for="first_name">Email</label>
+					        </div>
+					        <div class="input-field col s12">
+					          <input id="loginPassword" type="password" class="validate" required="">
+					          <label for="loginPassword">Password</label>
+					        </div>
+					        <div class="input-field col s12">
+					          <span id="loginError" class="red-text hide">Invalid Username or password</span>
+					        </div>
+					      	<div class="input-field col s12 m6 l6 left">
+					      	  Don't have an account yet?<br><a class="modal-trigger" href="#signUpModal"> Sign up here. </a>
+					        </div>
+					        <div class="input-field col s12 m6 l6">
+					          <button class="btn waves-light waves-effect right" id="loginBtn">
+					          <i class="material-icons right">send</i>
+					          Sign In
+					      	  </button>
+							</div>
+					      </div>
+					      		<div class="progress hide" id="loginProgress">
+									<div class="indeterminate"></div>
+								</div>
+					  	</form>
+		              </div>
+		            </div>
+		          </div>
+		        </div>
+				<div class="col m1 l2"></div>
+		      </div>
+		</div>
+		<div id="signUpModal" class="modal modal-fixed-footer">
+		    <form action="" id="signUp">
+		    <div class="modal-content">
+		    	<p class="flow-text">Sign Up</p>
+			    	<div class="row">
+			    		<p class="red-text hide" id="signUpErrMsg"><strong>Error:</strong> <span class="sem"></span></p>
+			    		<div class="input-field col s12">
+			    			<input type="text" class="validate" placeholder="" required="" id="student_number">
+			    			<label for="student_number">Student Number</label>
+			    		</div>
+			    		<div class="input-field col s12">
+			    			<input type="email" class="validate" placeholder="" id="email" onblur="validateEmail(this.value);">
+			    			<label for="email">Email</label>
+			    		</div>
+			    		<div class="input-field col s12">
+			    			<input type="password" class="validate" placeholder=""  id="password">
+			    			<label for="password">Password</label>
+			    		</div>
+			    		<div class="input-field col s12">
+			    			<input type="password" class="validate" placeholder=""  id="repassword">
+			    			<label for="repassword">Confirm Password</label>
+			    		</div>
+			    	</div>
+		    </div>
+		    <div class="modal-footer">
+		    	<a href="#!" class="modal-close btn-flat">Cancel</a>
+		    	<button class="modal-action btn waves-effect" id="signUpBtn" type="button">Sign Up</button>
+		    </div>
+		    </form>
+		</div>
+		
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	    <script>
+	    	$(window).on('load', function(){
+			 //PAGE IS FULLY LOADED 
+			 //FADE OUT YOUR OVERLAYING DIV
+			 $('#pageloader').fadeOut();
+			});
+			$(document).ready( function () {
+			    $('.modal').modal();
+			});
+	    </script>
+	    <script src="assets/js/login.js"></script>
+	</body>
+</html>

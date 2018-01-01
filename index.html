@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <!--Import Google Icon Font-->
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <!--Import materialize.css-->
+  	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  	  <link rel="stylesheet" href="assets/css/page.css">
+  	  <link rel="stylesheet" href="assets/css/datatables.min.css">
+  	  <link rel="stylesheet" href="assets/css/responsive.dataTables.min.css">
+  	  <link rel="manifest" href="manifest.json">
+  	  <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+  	  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <script>
+					      // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyAxhKZzxVp8SfaMb7IAWW-mhmu7GieuDRc",
+		    authDomain: "myclass-2017.firebaseapp.com",
+		    databaseURL: "https://myclass-2017.firebaseio.com",
+		    projectId: "myclass-2017",
+		    storageBucket: "myclass-2017.appspot.com",
+		    messagingSenderId: "994967988683"
+		  };
+		  firebase.initializeApp(config);
+	  </script>
+		<title>My Class | Library</title>
+	</head>
+	<body class="teal lighten-5">
+		<div id="pageloader">
+			<div class="preloader-wrapper big active">
+		      <div class="spinner-layer spinner-blue">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-red">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-yellow">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-green">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+	  <nav class="nav-extended">
+	    <div class="nav-wrapper blue">
+	      <a href="#!" class="brand-logo hide-on-med-and-down"><img src="assets/img/logo.png" alt="" height="65px"></a>
+	      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+	      <ul class="left show-on-small hide-on-med-and-up" style="margin-left: -2vh;">
+	        <li class="col s12">
+	        	<div class="input-field col s12">
+		          <i class="material-icons prefix">search</i>
+		          <input id="icon_prefix" type="text" class="validate searchtrigger" placeholder="Search Books.." style="margin-left: 5vh;">
+		        </div>
+	        </li>
+	      </ul>
+	      <ul class="right  show-on-small hide-on-med-and-up">
+	      	<li>
+	      		<a class='dropdown-button btn-flat white-text' href='#' data-activates='dropdown2' style="padding: 0; margin-left: -2vh"><i class="material-icons">more_vert</i>
+	        	</a>
+	        	  <ul id='dropdown2' class='dropdown-content'>
+				    <li><a href="#!">My Account</a></li>
+				    <li class="divider"></li>
+				    <li><a class="signOutBtn">Sign Out</a></li>
+				  </ul>
+	        </li>
+	      </ul>
+	      <ul class="right hide-on-small-only">
+	      	<li class="col s12">
+	        	<div class="input-field col s12">
+		          <i class="material-icons prefix">search</i>
+		          <input id="icon_prefix" type="text" class="validate searchtrigger2" placeholder="Search Book...">
+		        </div>
+	        </li>
+	        <li>
+	        	<a class='dropdown-button btn-flat white-text' href='#' data-activates='dropdown1'><i class="material-icons">more_vert</i>
+	        	</a>
+	        	  <ul id='dropdown1' class='dropdown-content'>
+				    <li><a href="#!">My Account</a></li>
+				    <li class="divider"></li>
+				    <li><a class="signOutBtn">Sign Out</a></li>
+				  </ul>
+	        </li>
+	      </ul>
+	      <ul class="side-nav" id="mobile-demo">
+	      	<li><img src="assets/img/logo2.png" alt="" height="65vh" class="margin-left-shift"></li>
+	        <li><a href="sass.html">Home</a></li>
+	        <li><a href="badges.html">My Books</a></li>
+	        <li><a href="collapsible.html">My Account</a></li>
+	        <li><a href="mobile.html">Sign Out</a></li>
+	      </ul>
+	    </div>
+	    <div class="nav-content blue">
+	    	<ul class="tabs tabs-transparent">
+		        <li class="tab"><a href="#dashboard">Dashboard</a></li>
+		        <li class="tab"><a href="#books">Books</a></li>
+		        <li class="tab"><a href="#quotes">Quotes</a></li>
+		        <li class="tab"><a href="#borrow_requests">Borrow Requests</a></li>
+		        <li class="tab"><a href="#messages">Messages</a></li>
+		    </ul>
+	    </div>
+	  </nav>
+
+	  <div id="results" class="col s12 hide"></div>
+	  <div id="dashboard">
+		<br>
+	  <div class="row">
+		<div class="col s12 m12 l8">
+			<div class="row">
+				<div class="col s12">
+					<div class="card">
+						<div class="card-content">
+							<h5><span class="greeting"></span>, <span id="user_name"></span></h5>
+							<input type="hidden" id="user_id">
+								<span class="card-title">Quote of the Day</span>
+								<p id="randomQuote"></p>
+								<span class="right" id="randomQuoteAuthor"></span><br>
+						</div>
+					</div>
+				</div>
+				<div class="col s12">
+					<div class="card">
+						<div class="card-content">
+							<span class="card-title">Borrow Requests</span>
+							<p id="empty_borrowed">You have <span class="brcount"></span> borrow request(s).</p>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-content">
+							<span class="card-title">Messages</span>
+							<p id="empty_borrowed">You have <span class="urmcount"></span> new message(s).</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col s12 m12 l4">
+          <div class="card ">
+            <div class="card-content">
+              <span class="card-title truncate">Newly Added Books</span>
+              <div class="row" id="newly_added_books"></div>
+        	</div>
+          </div>
+ 		</div>
+	  </div>
+	</div>
+
+	<div id="books">
+		<div class="row">
+			<br>
+			<div class="col s12 m8 l8">
+				<div class="card" id="bkTbl">
+					<div class="card-content">
+						<span class="card-title">Books</span>
+						<table class="display nowrap" id="booksTable" width="100%">
+							<thead>
+								<tr>
+									<th>Book Title</th>
+									<th>Author</th>
+									<th>Copyright Year</th>
+								</tr>
+							</thead>
+							<tbody id="booksTableBody"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m4 l4">
+				<div class="card">
+	          	<div class="card-content">
+	          		<span class="card-title">Add New Book</span>
+	          		<div class="row">
+	          			<form class="col s12" id="addNewBook">
+	          				<div class="row">
+	          					<p><span class="bookSubmitMessage hide">New Book has been Added</span></p>
+	          					<div class="input-field col s12">
+	          						<input type="number" id="book_accession_number" class="validate" required="">
+	          						<label for="book_accession_number">Accession Number</label>
+	          					</div>
+	          					<div class="input-field col s12">
+	          						<input type="text" id="book_author" class="validate" required="">
+	          						<label for="book_author">Author</label>
+	          					</div>
+	          					<div class="input-field col s12">
+	          						<input type="text" id="book_title" class="validate" required="">
+	          						<label for="book_title">Book Title</label>
+	          					</div>
+	          					<div class="input-field col s12">
+	          						<input type="text" id="book_callnumber" class="validate" required="">
+	          						<label for="book_callnumber">Call Number</label>
+	          					</div>
+	          					<div class="input-field col s12">
+	          						<input type="text" id="book_copyright_year" class="validate" required="">
+	          						<label for="book_copyright_year">Copyright Year</label>
+	          					</div>
+	          					<div class="input-field col s12">
+	          						<input type="text" id="book_pages" class="validate" required="">
+	          						<label for="book_pages">Pages</label>
+	          					</div>
+	          					<div class="input-field col s12">
+	          						<input type="text" id="book_publisher" class="validate" required="">
+	          						<label for="book_publisher">Publisher</label>
+	          					</div>
+	          					<div class="input-field col s12">
+	          						<input type="text" id="ddc_class" class="validate" required="">
+	          						<label for="ddc_class">Dewey Decimal Class</label>
+	          					</div>
+	          					<div class="input-field col s12">
+							      <button id="submitBook" class="btn waves-light waves-effect">Submit</button>
+							    </div>
+	          				</div>
+	          			</form>
+	          		</div>
+	          	</div>
+	          </div> 
+			</div>
+		</div>
+	</div>
+	<div id="quotes"><div class="row">
+			<br>
+			<div class="col s12 m8 l8">
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title">Quotes</span>
+						<table class="display nowrap" id="quotesTable" width="100%">
+							<thead>
+								<tr>
+									<th>Quote</th>
+									<th>Author</th>
+								</tr>
+							</thead>
+							<tbody id="quotesTableBody"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m4 l4">
+				<div class="card ">
+		            <div class="card-content">
+		              <span class="card-title truncate">Add New Quote</span>
+		              <div class="row" id="">
+		              	<form class="col s12" id="addNewQuote">
+					      <div class="row">
+						    <p><span class="quoteSubmitMessage hide">Your Quote has been Submitted.</span></p>
+					        <div class="input-field col s12">
+					          <textarea id="new_quote" class="materialize-textarea" required=""></textarea>
+					          <label for="new_quote">Quote</label>
+					        </div>
+					        <div class="input-field col s12">
+						      <input id="quote_author" type="text" class="validate" required="">
+						      <label for="quote_author">Author</label>
+						    </div>
+					        <div class="input-field col s12">
+						      <button id="submitQuote" class="btn waves-light waves-effect">Submit</button>
+						    </div>
+					      </div>
+					    </form>
+		              </div>
+		        	</div>
+	          </div>
+			</div>
+		</div>
+	</div>
+	<div id="borrow_requests">
+		<div class="row">
+			<br>
+			<div class="col s12 m4 l4">
+				<div class="card">
+					<div class="card-content" id="newRequestCards">
+						<span class="card-title">New Requests</span>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m4 l4">
+				<div class="card">
+					<div class="card-content" id="approvedRequestCards">
+						<span class="card-title">Approved Requests</span>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m4 l4">
+				<div class="card">
+					<div class="card-content" id="overdueBookCards">
+						<span class="card-title">Overdue Books</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="messages">
+			<div class="row">
+				<div class="collection col s12 m4 l3 inboxList" style="padding: 0px;"></div>
+				<div class="collection col m8 l9 hide messageList hide-on-small-only" style="padding: 0px;">
+					<a id="messageSender" class="collection-item backToInbox"></a>
+					<div class="msglist"></div>
+
+					<a class="collection-item right-align input-field">
+						<input type="hidden" id="messageID">
+						<input type="text" class="validate right-align" id="reply" placeholder="Type to reply...">
+						<button class="btn waves-effect" id="replyToBtn"><i class="material-icons right">send</i>Send</button>
+					</a>
+				</div>
+			</div>
+	</div>
+
+	  <div class="modal" id="bookModal">
+	  	<div class="modal-content">
+	  		<div class="card">
+	  			<div class="card-content">
+	  				<span class="card-title" id="bookModalTitle"></span>
+	  				<p class="grey-text" id="bookModalAuthor"></p>
+	  			</div>
+	  			<div class="card-action">
+	  				<input type="hidden" id="borrow_bookID">
+	  				<input type="hidden" id="borrow_bookTitle">
+	  				<button type="button" class="btn waves-effect borrow_book_btn"><i class="material-icons left">library_books</i>Borrow</button>
+	  			</div>
+	  		</div>
+	  	</div>
+	  </div>
+
+	  <div class="modal bottom-sheet" id="bookInfoModal">
+		<form id="updateBookInfo">
+	  	<div class="modal-content">
+			<p class="flow-text">Book Info</p>
+			<div class="row">
+				<div class="col s12 m4 l4 input-field">
+					<input type="hidden" id="bookInfoID" required="">
+					<input type="text" class="validate" id="bookInfoTitle" placeholder="" required="">
+					<label for="bookInfoID">Book Title</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoAuthor" placeholder="" required="">
+					<label for="bookInfoID">Author</label>
+				</div>
+
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoYear" placeholder="" required="">
+					<label for="bookInfoID">Copyright Year</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoPages" placeholder="" required="">
+					<label for="bookInfoID">Pages</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoPublisher" placeholder="" required="">
+					<label for="bookInfoID">Publisher</label>
+				</div>
+
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoCallNumber" placeholder="" required="">
+					<label for="bookInfoID">Call Number</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 m6 l6 input-field">
+					<input type="text" class="validate" id="bookInfoAccessionNumber" placeholder="" required="">
+					<label for="bookInfoID">Accession Number</label>
+				</div>
+				<div class="col s12 m6 l6 input-field">
+					<input type="text" class="validate" id="bookInfoDDClass" placeholder="" required="">
+					<label for="bookInfoID">Dewey Decimal Class</label>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="modal-footer">
+	      <a href="#!" id="deleteBookBtn" class="modal-action waves-effect waves-green btn red left">Delete</a>
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+	      <a href="#!" id="updateBookBtn" class="modal-action waves-effect waves-green btn blue">Update</a>
+	    </div>
+	    </form>
+	  </div>
+
+	  <div class="modal bottom-sheet" id="quoteInfoModal">
+		<form id="updateQuoteInfo">
+	  	<div class="modal-content">
+			<p class="flow-text">Quote Info</p>
+			<div class="row">
+				<div class="col s12 input-field">
+					<input type="hidden" id="quoteInfoID" required="">
+					<input type="text" class="validate" id="quoteInfoAuthor" placeholder="" required="">
+					<label for="quoteInfoAuthor">Author</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 input-field">
+					<textarea name="" id="quoteInfo" cols="30" rows="10" class="materialize-textarea" required="" placeholder=""></textarea>
+					<label for="quoteInfo">Quote</label>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="modal-footer">
+	      <a href="#!" id="deleteQuoteBtn" class="modal-action waves-effect waves-green btn red left">Delete</a>
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+	      <a href="#!" id="updateQuoteBtn" class="modal-action waves-effect waves-green btn blue">Update</a>
+	    </div>
+	    </form>
+	  </div>
+
+	  <div class="modal bottom-sheet" id="requestModal">
+		<form id="requestInfo">
+	  	<div class="modal-content">
+			<p class="flow-text">Request Info</p>
+			<div class="row">
+				<div class="col s12 input-field">
+					<input type="hidden" id="requestID" required="">
+					<input type="text" class="validate" id="requestBorrowerName" placeholder="" required="">
+					<label for="requestBorrowerName">Borrower's Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 input-field">
+					<input type="text" class="validate" id="requestBookName" placeholder="" required="">
+					<label for="requestBookName">Book to Borrow</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 input-field">
+					<input type="text" class="validate" id="requestDate" placeholder="" required="">
+					<label for="requestDate">Date of Request</label>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="modal-footer">
+	      <a href="#!" id="deleteRequestBtn" class="modal-action waves-effect waves-green btn red left">Deny</a>
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+	      <a href="#!" id="approveRequestBtn" class="modal-action waves-effect waves-green btn blue">Approve</a>
+	    </div>
+	    </form>
+	  </div>
+
+	  <div class="modal bottom-sheet" id="approvedRequestModal">
+		<form id="requestInfo">
+	  	<div class="modal-content">
+			<p class="flow-text">Request Info</p>
+			<div class="row">
+				<div class="col s12 input-field">
+					<input type="hidden" id="requestID" required="">
+					<input type="text" class="validate" id="requestABorrowerName" placeholder="" required="">
+					<label for="requestBorrowerName">Borrower's Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 input-field">
+					<input type="text" class="validate" id="requestABookName" placeholder="" required="">
+					<label for="requestBookName">Book to Borrow</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="requestADate" placeholder="" required="">
+					<label for="requestDate">Date of Request</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="borrowedDate" placeholder="" required="">
+					<label for="borrowedDate">Date Borrowed</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="dateDue" placeholder="" required="">
+					<label for="dateDue">Date Due</label>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="modal-footer">
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+	      <a href="#!" id="returnBookBtn" class="modal-action waves-effect waves-green btn blue">Return Book</a>
+	    </div>
+	    </form>
+	  </div>
+
+	  <div class="modal" id="viewMsg">
+	  	<div class="modal-content">
+	  		<p class="flow-text">Message Details</p>
+	  		<span><strong>Jason Momoa :</strong> Can i borrow a book?</span><br>
+	  		<div class="row">
+	  			<div class="col s12 input-field">
+			  		<input type="text" class="validate" id="replyMsg">
+			  		<label for="replyMsg">Type a reply..</label>
+	  			</div>
+	  			<button class="btn waves-effect modal-action"><i class="material-icons right">send</i>Send</button>
+	  		</div>
+	  	</div>
+	  </div>
+
+
+
+
+	  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	  <script src="assets/js/datatables.min.js"></script>
+	  <script src="assets/js/dataTables.responsive.min.js"></script>
+	  <script type="text/javascript" src="assets/js/page.js"></script>
+	  <script>
+	  	$(window).on('load', function(){
+			 //PAGE IS FULLY LOADED 
+			 //FADE OUT YOUR OVERLAYING DIV
+			 $('#pageloader').fadeOut();
+			 if('serviceWorker' in navigator){ 
+			 	try{
+			 		navigator.serviceWorker.register('sw.js');
+			 		console.log('SW registered');
+			 	}catch(error){
+			 		console.log('SW failed');
+			 	}
+			 }
+		});
+		
+	  	$(document).ready(function(){
+
+	  		
+	  		getAllBooks();
+	  		getAllQuotes();
+	  		getNewRequests();
+	  		getApprovedRequests();
+	  		getOverdueBooks();
+	  		getBorrowRequestCount();
+	  		scanOverdueBooks();
+	  		getMessages();
+	  		getUnreadMessagesCount();
+			$('.dropdown-button').dropdown({
+				alignment: 'left',
+				constrainWidth: false
+			});
+			$(".button-collapse").sideNav({
+				draggable: true
+			});
+			$('.modal').modal();
+			// getBorrowedBooks();
+		});
+	  </script>
+	</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <!--Import Google Icon Font-->
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <!--Import materialize.css-->
+  	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  	  <link rel="stylesheet" href="assets/css/page.css">
+  	  <link rel="stylesheet" href="assets/css/datatables.min.css">
+  	  <link rel="stylesheet" href="assets/css/responsive.dataTables.min.css">
+  	  <link rel="manifest" href="manifest.json">
+  	  <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+  	  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <script>
+					      // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyAxhKZzxVp8SfaMb7IAWW-mhmu7GieuDRc",
+		    authDomain: "myclass-2017.firebaseapp.com",
+		    databaseURL: "https://myclass-2017.firebaseio.com",
+		    projectId: "myclass-2017",
+		    storageBucket: "myclass-2017.appspot.com",
+		    messagingSenderId: "994967988683"
+		  };
+		  firebase.initializeApp(config);
+	  </script>
+		<title>My Class | Library</title>
+	</head>
+	<body class="teal lighten-5">
+		<div id="pageloader">
+			<div class="preloader-wrapper big active">
+		      <div class="spinner-layer spinner-blue">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-red">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-yellow">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+
+		      <div class="spinner-layer spinner-green">
+		        <div class="circle-clipper left">
+		          <div class="circle"></div>
+		        </div><div class="gap-patch">
+		          <div class="circle"></div>
+		        </div><div class="circle-clipper right">
+		          <div class="circle"></div>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+	  <nav class="nav-extended">
+	    <div class="nav-wrapper blue">
+	      <a href="#!" class="brand-logo hide-on-med-and-down"><img src="assets/img/logo.png" alt="" height="65px"></a>
+	      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+	      <ul class="left show-on-small hide-on-med-and-up" style="margin-left: -2vh;">
+	        <li class="col s12">
+	        	<div class="input-field col s12">
+		          <i class="material-icons prefix">search</i>
+		          <input id="icon_prefix" type="text" class="validate searchtrigger" placeholder="Search Books.." style="margin-left: 5vh;">
+		        </div>
+	        </li>
+	      </ul>
+	      <ul class="right  show-on-small hide-on-med-and-up">
+	      	<li>
+	      		<a class='dropdown-button btn-flat white-text' href='#' data-activates='dropdown2' style="padding: 0; margin-left: -2vh"><i class="material-icons">more_vert</i>
+	        	</a>
+	        	  <ul id='dropdown2' class='dropdown-content'>
+				    <li><a href="#myAccount" class="modal-trigger myAccountModal">My Account</a></li>
+				    <li class="divider"></li>
+				    <li><a class="signOutBtn">Sign Out</a></li>
+				  </ul>
+	        </li>
+	      </ul>
+	      <ul class="right hide-on-small-only">
+	      	<li class="col s12">
+	        	<div class="input-field col s12">
+		          <i class="material-icons prefix">search</i>
+		          <!-- <input id="icon_prefix" type="text" class="validate searchtrigger2" placeholder="Search Book..."> -->
+		        </div>
+	        </li>
+	        <li>
+	        	<a class='dropdown-button btn-flat white-text' href='#' data-activates='dropdown1'><i class="material-icons">more_vert</i>
+	        	</a>
+	        	  <ul id='dropdown1' class='dropdown-content'>
+				    <li><a href="#myAccount" class="modal-trigger myAccountModal">My Account</a></li>
+				    <li class="divider"></li>
+				    <li><a class="signOutBtn">Sign Out</a></li>
+				  </ul>
+	        </li>
+	      </ul>
+	      <ul class="side-nav" id="mobile-demo">
+	      	<li><img src="assets/img/logo2.png" alt="" height="65vh" class="margin-left-shift"></li>
+	        <li><a href="student.html">Home</a></li>
+	        <li><a href="#myAccount" class="modal-trigger myAccountModal">My Account</a></li>
+	        <li><a href="#" class="signOutBtn">Sign Out</a></li>
+	      </ul>
+	    </div>
+	    <div class="nav-content blue">
+	    	<ul class="tabs tabs-transparent">
+		        <li class="tab"><a href="#dashboard">Dashboard</a></li>
+		        <li class="tab"><a href="#myRequests">My Requests</a></li>
+		        <li class="tab"><a href="#messages">Messages</a></li>
+		    </ul>
+	    </div>
+	  </nav>
+	  <div id="results" class="col s12 hide"></div>
+	  <!-- Dashboard -->
+		<div id="dashboard">
+			<br>
+		  <div class="row">
+			<div class="col s12 m12 l8">
+				<div class="row">
+					<div class="col s12">
+						<div class="card">
+							<div class="card-content">
+								<h5><span class="greeting"></span>, <span id="user_name"></span></h5>
+								<input type="hidden" id="user_id">
+								<input type="hidden" id="user_fullname">
+									<span class="card-title">Quote of the Day</span>
+									<p id="randomQuote"></p>
+									<span class="right" id="randomQuoteAuthor"></span><br>
+							</div>
+						</div>
+					</div>
+					<div class="col s12">
+						<div class="card">
+							<div class="card-content">
+								<span class="card-title">Borrow Requests</span>
+								<p id="empty_borrowed">You have <span class="myPendingCount">0</span> Pending Approval request(s).</p>
+								<p id="empty_borrowed">You have <span class="myApprovedCount">0</span> Approved request(s).</p>
+								<p id="empty_borrowed">You have <span class="myOverdueCount">0</span> Overdue Books.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col s12 m12 l4">
+	          <div class="card ">
+	            <div class="card-content">
+	              <span class="card-title truncate">Newly Added Books</span>
+	              <div class="row" id="newly_added_books"></div>
+	        	</div>
+	          </div>
+	 		</div>
+		  </div>
+		</div>
+		<!-- End Dashboard -->
+		<!-- My Requests -->
+		<div id="myRequests">
+			<div class="row">
+				<div class="col s12 m4 l4">
+					<div class="card">
+						<div class="card-content">
+							<span class="card-title">Pending Approval</span>
+							<div id="pendingApprovalList"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 m4 l4">
+					<div class="card">
+						<div class="card-content">
+							<span class="card-title">Approved</span>
+							<div id="approvedList"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col s12 m4 l4">
+					<div class="card">
+						<div class="card-content">
+							<span class="card-title">Overdue Books</span>
+							<div id="overdueList">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- My Requests -->
+		<!-- My Messages -->
+		<div id="messages">
+			<ul class="collection senderList">
+				<li class="collection-item">Informatics Librarian <a href="#" id="viewMessageBtn"><i class="material-icons right">navigate_next</i></a></li>
+			</ul>
+			<ul class="collection messageList hide">
+				<li class="collection-item">Informatics Librarian <a href="#" id="backMessageBtn"><i class="material-icons left">chevron_left</i></a></li>
+					<div id="msgListing">
+					</div>
+				<li class="collection-item">
+					<div class="row">
+						<div class="col s9 input-field">
+							<input type="hidden" id="messageID" required="">
+							<textarea placeholder="Type a message..." class="materialize-textarea" required="" id="sendMessageMsg"></textarea>
+						</div>
+						<div class="col s2 input-field">
+							<button class="btn" id="sendMessageBtn"><i class="material-icons">send</i></button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- My Messages -->
+
+
+<!-- Modals -->
+	<div class="modal bottom-sheet" id="bookInfoModal">
+		<form id="updateBookInfo">
+	  	<div class="modal-content">
+			<p class="flow-text">Book Info</p>
+			<div class="row">
+				<div class="col s12 m4 l4 input-field">
+					<input type="hidden" id="bookInfoID" required="">
+					<input type="text" class="validate" id="bookInfoTitle" placeholder="" readonly>
+					<label for="bookInfoID">Book Title</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoAuthor" placeholder="" readonly>
+					<label for="bookInfoID">Author</label>
+				</div>
+
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoYear" placeholder="" readonly>
+					<label for="bookInfoID">Copyright Year</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoPages" placeholder="" readonly>
+					<label for="bookInfoID">Pages</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="bookInfoPublisher" placeholder="" readonly>
+					<label for="bookInfoID">Publisher</label>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="modal-footer">
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
+	      <a href="#!" id="borrowBookBtn" class="modal-action waves-effect waves-green btn blue">Borrow</a>
+	    </div>
+	    </form>
+	</div>
+
+	<div class="modal bottom-sheet" id="requestView">
+		<form id="cancelRequest">
+	  	<div class="modal-content">
+			<p class="flow-text">Request Info</p>
+			<div class="row">
+				<div class="col s12 m4 l4 input-field">
+					<input type="hidden" id="requestID" required="">
+					<input type="text" class="validate" id="requestBookTitle" placeholder="" readonly>
+					<label for="requestBookTitle">Book Title</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="requestBookDate" placeholder="" readonly>
+					<label for="requestBookDate">Date of Request</label>
+				</div>
+
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="requestBookStatus" placeholder="" readonly>
+					<label for="requestBookStatus">Status</label>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="modal-footer">
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+	      <a href="#!" id="cancelRequestBtn" class="modal-action waves-effect waves-green btn red">Cancel Request</a>
+	    </div>
+	    </form>
+	</div>
+
+	<div class="modal bottom-sheet" id="overdueView">
+		<form id="overdueViewForm">
+	  	<div class="modal-content">
+			<p class="flow-text">Overdue Book Info <br><sub class="grey-text text-darken-2">Please return this book to the library immediately to avoid further penalties.</sub></p><br>
+			<div class="row">
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="overdueBookTitle" placeholder="" readonly>
+					<label for="overdueBookTitle">Book Title</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="overdueBookBorrowDate" placeholder="" readonly>
+					<label for="overdueBookBorrowDate">Date Borrowed</label>
+				</div>
+
+				<div class="col s12 m4 l4 input-field">
+					<input type="text" class="validate" id="overdueBookDueDate" placeholder="" readonly>
+					<label for="overdueBookDueDate">Date Due</label>
+				</div>
+			</div>
+	  	</div>
+	  	<div class="modal-footer">
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+	    </div>
+	    </form>
+	</div>
+
+	<div class="modal bottom-sheet" id="myAccount">
+		<form id="myAccount">
+	  	<div class="modal-content">
+			<p class="flow-text">My Account</p>
+			<div class="row">
+				<div class="col s12 m4 l4 input-field">
+					<input type="email" class="validate" id="myAccountEmail" placeholder="" readonly>
+					<label for="myAccountEmail">Email Address</label>
+				</div>
+				<div class="col s12 m4 l4 input-field">
+					<input type="password" class="validate" id="myAccountPassword" placeholder="(unchanged)">
+					<label for="myAccountPassword">Password</label>
+				</div>
+
+				<div class="col s12 m4 l4 input-field">
+					<input type="password" class="validate" id="myAccountCPassword" placeholder="">
+					<label for="myAccountCPassword">Confirm Password</label>
+				</div>
+				<p class="red-text myAccountError hide"></p>
+			</div>
+	  	</div>
+	  	<div class="modal-footer">
+	      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+	      <a href="#!" class="modal-action waves-effect waves-green btn blue disabled" id="updateMyAccountBtn">Update</a>
+	    </div>
+	    </form>
+	</div>
+<!-- End Modals -->
+
+	  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	  <script src="assets/js/datatables.min.js"></script>
+	  <script src="assets/js/dataTables.responsive.min.js"></script>
+	  <script type="text/javascript" src="assets/js/student.js"></script>
+	  <script>
+	  	$(window).on('load', function(){
+			 //PAGE IS FULLY LOADED 
+			 //FADE OUT YOUR OVERLAYING DIV
+			 $('#pageloader').fadeOut();
+			 if('serviceWorker' in navigator){ 
+			 	try{
+			 		navigator.serviceWorker.register('sw.js');
+			 		console.log('SW registered');
+			 	}catch(error){
+			 		console.log('SW failed');
+			 	}
+			 }
+		});
+		
+	  	$(document).ready(function(){
+			$('.dropdown-button').dropdown({
+				alignment: 'left',
+				constrainWidth: false
+			});
+			$(".button-collapse").sideNav({
+				draggable: true
+			});
+			$('.modal').modal();
+		});
+	  </script>
+	</body>
+</html>
